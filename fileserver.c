@@ -4,7 +4,7 @@ int main(int argc, char **argv)
 {
     /* input the file name */
     char filename[FILE_NAME_MAX_SIZE];
-    bzero(filename,FILE_NAME_MAX_SIZE);
+    bzero(filename, FILE_NAME_MAX_SIZE);
     printf("Please input the file name you want to send: ");
     fgets(filename, FILE_NAME_MAX_SIZE, stdin);
     int file_name_size = strlen(filename) - 1;
@@ -27,7 +27,7 @@ int main(int argc, char **argv)
     }
 
     /* bind */    
-    if(bind(sockfd,(struct sockaddr*)&svraddr,sizeof(svraddr)) < 0)
+    if(bind(sockfd, (struct sockaddr*)&svraddr, sizeof(svraddr)) < 0)
     {
         perror("bind failed");
         exit(1);
@@ -45,7 +45,7 @@ int main(int argc, char **argv)
         socklen_t length = sizeof(clientaddr);
 
         /* accept */
-        connfd = accept(sockfd,(struct sockaddr*)&clientaddr,&length);
+        connfd = accept(sockfd, (struct sockaddr*)&clientaddr, &length);
         if(connfd < 0)
         {
             perror("connect failed");
@@ -69,15 +69,15 @@ int main(int argc, char **argv)
         FILE *fd = fopen(filename, "rb");
         if(fd == NULL)
         {
-            printf("File :%s not found!\n",filename);
+            printf("File :%s not found!\n", filename);
         }
         else 
         {
-            bzero(buff,BUFFSIZE);
+            bzero(buff, BUFFSIZE);
             int file_block_length = 0;
-            while((file_block_length = fread(buff, sizeof(char), BUFFSIZE,fd)) > 0)
+            while((file_block_length = fread(buff, sizeof(char), BUFFSIZE, fd)) > 0)
             {
-                if(send(connfd, buff,file_block_length, 0) < 0)
+                if(send(connfd, buff, file_block_length, 0) < 0)
                 {
                     perror("Send failed");
                     exit(1);

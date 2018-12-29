@@ -8,7 +8,7 @@ int main(int argc, char **argv)
     
     if(argc != 2)
     {
-        fprintf(stderr,"Usage:./fileclient IP_Address\n");
+        fprintf(stderr, "Usage: ./fileclient IP_Address\n");
         exit(1);
     }
     struct sockaddr_in clientaddr;
@@ -19,7 +19,7 @@ int main(int argc, char **argv)
     clientaddr.sin_port = htons(0);
     
     /* create socket */
-    clientfd = socket(AF_INET,SOCK_STREAM,0);
+    clientfd = socket(AF_INET, SOCK_STREAM, 0);
     
     if(clientfd < 0)    
     {
@@ -56,7 +56,7 @@ int main(int argc, char **argv)
     char buff[BUFFSIZE];
     char filename[FILE_NAME_MAX_SIZE];
     int count;
-    bzero(buff,BUFFSIZE);
+    bzero(buff, BUFFSIZE);
 
     count = recv(clientfd, buff, BUFFSIZE, 0);
     if(count < 0)
@@ -76,7 +76,7 @@ int main(int argc, char **argv)
         perror("open file failed");
         exit(1);
     }
-    bzero(buff,BUFFSIZE);
+    bzero(buff, BUFFSIZE);
     
     int length = 0;
     
@@ -105,5 +105,3 @@ int main(int argc, char **argv)
     close(clientfd);  
     return 0;
 }
-
-
